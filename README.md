@@ -27,7 +27,7 @@
         <attr name="dragOut" format="boolean" />
         ```
     * 在xml中配置：
-    ```
+    ``` java
     	<com.victor.library.wheelview.WheelView
             android:id="@+id/wheelview"
             android:layout_width="0dp"
@@ -41,7 +41,7 @@
             />
     ```
     * 在代码中配置：
-   	```
+   	``` java
    		var dist: ArrayList<String> = ArrayList()
         dist.addAll(listOf("越秀区", "荔湾区", "海珠区", "天河区", "白云区", "黄埔区", "花都区", "番禺区", "南沙区", "增城区", "从化区"))
         wheelView = find(R.id.wheelview)
