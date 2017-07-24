@@ -20,36 +20,36 @@
 ![github](https://github.com/victorfan336/WheelView/blob/master/wheelview.gif)  
 
 ## 使用
-	* 定义了三个可配置属性：
-		```
-		<attr name="textColor" format="color"/>
-        <attr name="textSize" format="dimension" />
-        <attr name="dragOut" format="boolean" />
+* 1.定义了三个可配置属性：
+	``` java
+    <attr name="textColor" format="color"/>
+    <attr name="textSize" format="dimension" />
+    <attr name="dragOut" format="boolean" />
         ```
-    * 在xml中配置：
-    ``` java
-    	<com.victor.library.wheelview.WheelView
-            android:id="@+id/wheelview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:focusable="true"
-            android:gravity="center"
-            app:dragOut="true"
-            app:textColor="@color/black"
-            app:textSize="12sp"
-            />
-    ```
-    * 在代码中配置：
-   	``` java
-   		var dist: ArrayList<String> = ArrayList()
-        dist.addAll(listOf("越秀区", "荔湾区", "海珠区", "天河区", "白云区", "黄埔区", "花都区", "番禺区", "南沙区", "增城区", "从化区"))
-        wheelView = find(R.id.wheelview)
-        wheelView?.setText(dist)
-        // 设置滚动监听
-        wheelView?.setWheelScrollListener(object : WheelView.WheelScrollListener {
-            override fun changed(selected: Int, name: String) {
-                toast("$name:被选中了第" + selected)
-            }
-        })
-   	```
+* 2.在xml中配置：
+``` java
+	<com.victor.library.wheelview.WheelView
+        android:id="@+id/wheelview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:focusable="true"
+        android:gravity="center"
+        app:dragOut="true"
+        app:textColor="@color/black"
+        app:textSize="12sp"
+        />
+```
+* 在代码中配置：
+	``` java
+		var dist: ArrayList<String> = ArrayList()
+    dist.addAll(listOf("越秀区", "荔湾区", "海珠区", "天河区", "白云区", "黄埔区", "花都区", "番禺区", "南沙区", "增城区", "从化区"))
+    wheelView = find(R.id.wheelview)
+    wheelView?.setText(dist)
+    // 设置滚动监听
+    wheelView?.setWheelScrollListener(object : WheelView.WheelScrollListener {
+        override fun changed(selected: Int, name: String) {
+            toast("$name:被选中了第" + selected)
+        }
+    })
+	```
