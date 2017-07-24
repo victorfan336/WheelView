@@ -16,9 +16,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url "http://localhost:8081/nexus/content/repositories/releases"
-        }
     }
 }
 

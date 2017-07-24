@@ -30,5 +30,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.1.2"
     compile "org.jetbrains.anko:anko-common:0.8.2"
-    compile 'com.victor.library:wheelview:1.0.1'
+    compile project(':WheelView')
 }

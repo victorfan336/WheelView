@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin:'maven-publish'
-apply plugin:'maven'
 
 android {
     compileSdkVersion 26
@@ -49,27 +47,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.1.2"
-    compile "org.jetbrains.anko:anko-common:0.8.2"
-}
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://localhost:8081/nexus/content/repositories/releases/") {
-                authentication(userName: "admin", password: "admin123")
-            }
-
-            pom.groupId = 'com.victor.library'
-            pom.artifactId = 'wheelview'
-            pom.version = '1.0.1'
-
-            pom.project {
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-            }
-        }
-    }
 }
