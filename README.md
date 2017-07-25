@@ -20,13 +20,16 @@
 ![github](https://github.com/victorfan336/WheelView/blob/master/wheelview.gif)  
 
 ## 使用
-* 1.定义了三个可配置属性：
+
+* Import
+    compile 'com.victor.library:wheelview:1.0.1@aar'
+* 定义了三个可配置属性：
 	``` java
     <attr name="textColor" format="color"/>
     <attr name="textSize" format="dimension" />
     <attr name="dragOut" format="boolean" />
     ```
-* 2.在xml中配置：
+* 在xml中配置：
 ``` java
 	<com.victor.library.wheelview.WheelView
         android:id="@+id/wheelview"
@@ -40,7 +43,7 @@
         app:textSize="12sp"
         />
 ```
-* 3.在代码中配置：
+* 在代码中配置：
 	``` java
 	var dist: ArrayList<String> = ArrayList()
     dist.addAll(listOf("越秀区", "荔湾区", "海珠区", "天河区", "白云区", "黄埔区", "花都区", "番禺区", "南沙区", "增城区", "从化区"))
