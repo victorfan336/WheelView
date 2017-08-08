@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin:'maven-publish'
+apply plugin:'maven'
 
 android {
     compileSdkVersion 26
@@ -47,4 +49,31 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.1.2"
+    compile "org.jetbrains.anko:anko-common:0.8.2"
+}
+
+// 上传到私服
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: properties.getProperty("POM_URL")) {
+                authentication(userName: properties.getProperty("nexus.user"), password: properties.getProperty("nexus.password"))
+            }
+
+            pom.groupId = properties.getProperty("POM_GROUP_ID")
+            pom.artifactId = properties.getProperty("POM_ATRIFACT_ID")
+            pom.version = properties.getProperty("POM_VERSION")
+
+            pom.project {
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+            }
+        }
+    }
 }

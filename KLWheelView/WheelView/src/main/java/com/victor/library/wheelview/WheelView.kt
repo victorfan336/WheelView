@@ -12,13 +12,15 @@ import android.view.VelocityTracker
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.OverScroller
+import com.victor.library.wheelview.mode.IWheelViewMode
+import com.victor.library.wheelview.mode.WheelViewRecycleMode
 
 
 /**
  * Created by Victor on 2017/6/12.
  */
 
-class WheelView : View {
+class WheelView<T>: View {
     private val TAG = "WheelView"
     private val SHADOWS_COLORS = intArrayOf(0xefffffff.toInt(), 0xcfffffff.toInt(), 0x3fffffff)
     private var paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -26,10 +28,9 @@ class WheelView : View {
     private var textSize : Float = 19f
     private var bgColor: Int = 0x000
     private lateinit var scroller : OverScroller
-    private var eachItemHeight = 60
+    public var eachItemHeight = 60
     private var maxShowSize = 7
     private var prevY : Float = 0f
-    private var textList = ArrayList<String>()
     // Shadows drawables
     private var topShadow: GradientDrawable? = null
     private var bottomShadow: GradientDrawable? = null
@@ -45,6 +46,7 @@ class WheelView : View {
     private var mEdgeSlop: Float = 0f
     private var mFlingDistance: Int = 0
     private var mCurrY: Int = 0
+    private lateinit var adapter: IWheelviewAdapter
     /**
      * 模式:居中显示；从起始位置显示；循环显示
      */
@@ -109,7 +111,7 @@ class WheelView : View {
         Log.e(TAG, "currY = $mCurrY -- mFlingDistance = $mFlingDistance -- moveIndex = $moveIndex  -- selected = $selected")
         if (mSelected != selected) {
             mSelected = selected
-            wheelScrollListener?.changed(mSelected, textList[mSelected])
+            wheelScrollListener?.changed(mSelected, adapter.get(mSelected))
         }
     }
 
@@ -128,12 +130,13 @@ class WheelView : View {
         }
     }
 
-    fun setText(list : ArrayList<String>) {
-        textList.clear()
-        textList.addAll(list)
-        scrollTo(0, 0)
-        wheelViewMode.childrenSize = textList.size
-        invalidate()
+    fun getAdapter(): IWheelviewAdapter {
+        return adapter
+    }
+
+    fun setAdapter(adapter: IWheelviewAdapter) {
+        this.adapter = adapter
+        wheelViewMode.childrenSize = (adapter.count)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -163,7 +166,7 @@ class WheelView : View {
                     vTracker?.clear()
                 }
 
-                if (textList?.size == 0) {
+                if (adapter.count == 0) {
                     return false
                 }
 
@@ -237,7 +240,7 @@ class WheelView : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (textList.size == 0) return
+        if (adapter == null || adapter.count == 0) return
         canvas.drawColor(bgColor)
         clipView(canvas)
         drawText(canvas)
@@ -258,24 +261,24 @@ class WheelView : View {
         var y : Float
         var x : Float
         var minStart: Int = 0
-        var count: Int = textList.size
+        var count: Int = adapter.count
         if (wheelViewMode is WheelViewRecycleMode) {
             minStart = - maxShowSize / 2 - 1 + scrollY / eachItemHeight // 多显示一个，避免闪现
-            count = textList.size +  scrollY / eachItemHeight
+            count = adapter.count +  scrollY / eachItemHeight
         }
         var index: Int = 0
         for (i in minStart until count step 1) {
             index = i
             if (wheelViewMode is WheelViewRecycleMode && index < 0) {
                 while (index < 0) {
-                    index += textList.size
+                    index += adapter.count
                 }
             } else {
                 index = i
             }
-            x = (width - paint.measureText(textList[index % textList.size])) / 2
+            x = (width - paint.measureText(adapter.getItemeTitle(index % adapter.count))) / 2
             y = wheelViewMode.getTextDrawY(height, i, paint)
-            canvas.drawText(textList[index % textList.size], x, y, paint)
+            canvas.drawText(adapter.getItemeTitle(index % adapter.count), x, y, paint)
         }
     }
 
@@ -315,7 +318,7 @@ class WheelView : View {
 
     fun getMode() = this.wheelViewMode
 
-    fun getContentSize() = textList.size
+    fun getContentSize() = adapter.count
 
     fun getMaxShowSize() = maxShowSize
 
@@ -325,26 +328,7 @@ class WheelView : View {
 
 
     interface WheelScrollListener {
-        fun changed(selected : Int, name: String)
-    }
-
-
-    companion object {
-
-        @JvmStatic fun getCenterModeInstance(wheelView: WheelView): IWheelViewMode {
-
-            return WheelViewCenterMode(wheelView.eachItemHeight, wheelView.getContentSize())
-        }
-
-        @JvmStatic fun getStartModeInstance(wheelView: WheelView): IWheelViewMode {
-
-            return WheelViewStartMode(wheelView.eachItemHeight, wheelView.getContentSize())
-        }
-
-        @JvmStatic fun getRecycleModeInstance(wheelView: WheelView): IWheelViewMode {
-
-            return WheelViewRecycleMode(wheelView.eachItemHeight, wheelView.getContentSize())
-        }
+        fun changed(selected: Int, name: Any?)
     }
 
 }

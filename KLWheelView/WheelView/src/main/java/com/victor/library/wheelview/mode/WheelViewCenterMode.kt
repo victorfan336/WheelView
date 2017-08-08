@@ -1,4 +1,4 @@
-package com.victor.library.wheelview
+package com.victor.library.wheelview.mode
 
 import android.graphics.Paint
 
