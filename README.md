@@ -34,22 +34,22 @@
 * 在xml中配置：
 ``` java    
 	<com.victor.library.wheelview.WheelView
-        android:id="@+id/wheelview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.0"
-        android:focusable="true"
-        android:gravity="center"
-        app:dragOut="true"
-        app:textColor="@color/black"
-        app:textSize="12sp"
+	        android:id="@+id/wheelview"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.0"
+	        android:focusable="true"
+	        android:gravity="center"
+	        app:dragOut="true"
+	        app:textColor="@color/black"
+	        app:textSize="12sp"
         />
 ```   
 * 自定义Adapter
 	只需要实现IWheelviewAdapter即可     
 	``` java   
 	interface IWheelviewAdapter {
-	    fun getItemeTitle(i: Int): kotlin.String
+	    fun getItemTitle(i: Int): kotlin.String
 	    val count: Int
 	    operator fun get(index: Int): Any
 	}
