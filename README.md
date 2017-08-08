@@ -6,14 +6,15 @@
 
 
 ## 特点
-* 使用最新语言Kotlin编写
-* 完全使用自定义的view编写完成，我看过有些人不是完全基于view去些写的
+* 使用Kotlin语言编写
+* 完全使用自定义的view编写完成，我看过有些人不是完全基于view写的
 * 实现了三种滚轮模式：  
 	    * 循环模式:  
         * 居中显示模式；    
         * 从头开始显示
 * 自己处理了滚动事件和快速滑动事件
 * 处理了边界检测和弹性效果
+* 通过adapter快速添加数据
 
 
 ## 效果图
@@ -21,8 +22,8 @@
 
 ## 使用
 
-* Import   
-    compile 'com.victor.library:wheelview:1.0.1@aar'   
+* Import(java版本的)   
+    compile 'com.victor.library:wheelview:1.0.2@aar'   
 
 * 定义了三个可配置属性：
 	``` java
@@ -31,7 +32,7 @@
     <attr name="dragOut" format="boolean" />
     ```
 * 在xml中配置：
-``` java
+``` java    
 	<com.victor.library.wheelview.WheelView
         android:id="@+id/wheelview"
         android:layout_width="0dp"
@@ -43,20 +44,29 @@
         app:textColor="@color/black"
         app:textSize="12sp"
         />
-```
+```   
+* 自定义Adapter
+	只需要实现IWheelviewAdapter即可     
+	``` java   
+	interface IWheelviewAdapter {
+	    fun getItemeTitle(i: Int): kotlin.String
+	    val count: Int
+	    operator fun get(index: Int): Any
+	}
+	```     
 * 在代码中配置：
 	``` java
-	var dist: ArrayList<String> = ArrayList()
-    dist.addAll(listOf("越秀区", "荔湾区", "海珠区", "天河区", "白云区", "黄埔区", "花都区", 
-            "番禺区", "南沙区", "增城区", "从化区"))
-    wheelView = find(R.id.wheelview)
-    wheelView?.setText(dist)
+	var provider: ArrayList<String> = ArrayList()
+        provider.addAll(listOf("天津市", "北京市", "黑龙江省", "江苏省", "浙江省", "安徽省",
+                "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省"))
+        val providerAdapter = WheelviewAdapter(provider)
+        wheelView1?.setAdapter(providerAdapter)
     // 设置滚动监听
-    wheelView?.setWheelScrollListener(object : WheelView.WheelScrollListener {
-        override fun changed(selected: Int, name: String) {
-            toast("$name:被选中了第" + selected)
-        }
-    })
+	    wheelView?.setWheelScrollListener(object : WheelView.WheelScrollListener {
+	        override fun changed(selected: Int, name: Any) {
+	            toast("$name:被选中了第" + selected)
+	        }
+	    })
 	```
 
     ## 详细说明   
