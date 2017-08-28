@@ -46,12 +46,12 @@
 
 
 * 定义了三个可配置属性：
-	``` java
+	``` java              
     <attr name="textColor" format="color"/>
     <attr name="textSize" format="dimension" />
     <attr name="dragOut" format="boolean" />
     <attr name="itemheight" format="dimension" />
-    ```
+    ```                
 * 在xml中配置：
 ``` java    
 	<com.victor.library.wheelview.WheelView
@@ -65,7 +65,7 @@
 	        app:textColor="@color/black"
 	        app:textSize="12sp"
         />
-```   
+```             
 * 自定义Adapter
 	只需要实现IWheelviewAdapter即可     
 	``` java    
@@ -75,9 +75,9 @@
     	T get(int index);            
     	void clear();             
 	}	
-	```  
+	```   
 	只要实现以上接口方法即可，下面示范一个自定义的Adapter:
-	```java 
+	``` java     
 
 	public class WheelviewAdapter implements IWheelviewAdapter {
 
@@ -123,9 +123,9 @@
 	    }
 	}
 
-	```  
+	```     
 * 在代码中配置：
-	``` java
+	``` java            
 	private String[] provides = {"天津市", "北京市", "黑龙江省", "江苏省", "浙江省", "安徽省",
             "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省"};     
     @Override
@@ -151,18 +151,18 @@
         });      
 
 	}       
-	```   
+	```        
 	设置对齐模式：默认是WheelViewCenterMode居中显示     
 	```java   
-		wheelView1.setMode(WheelView.getStartModeInstance(wheelView1));           
-		wheelView1.setMode(WheelView.getCenterModeInstance(wheelView1));     
-		wheelView1.setMode(WheelView.getRecycleModeInstance(wheelView1));       
-	```
+	wheelView1.setMode(WheelView.getStartModeInstance(wheelView1));           
+	wheelView1.setMode(WheelView.getCenterModeInstance(wheelView1));     
+	wheelView1.setMode(WheelView.getRecycleModeInstance(wheelView1));       
+	```      
 
     ## 详细说明     
-        可以[下载demo APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk)试试      
+        可以 [下载demo APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk) 试试              
             
-        请参考博客：[文韬_武略](http://blog.csdn.net/fwt336/article/details/76086360)    
+        请参考博客: [文韬_武略](http://blog.csdn.net/fwt336/article/details/76086360)                            
           
 
     欢迎star或fork
