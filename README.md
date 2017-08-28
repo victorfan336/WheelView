@@ -27,8 +27,8 @@
 
 * Import(java版本的)   
     compile 'com.victor.library:wheelview:1.0.8@aar'  
-    version1.0.8:   
-    	1.新增itemHeight属性配置；   
+    version1.0.8:    
+        1.新增itemHeight属性配置；      
     	   
     	2.解决UI拖出可见范围后，有时回弹不准的问题，是由于没有做四舍五入的问题导致的；    
     	   
@@ -89,9 +89,9 @@
 	```
 
     ## 详细说明     
-        可以![下载demo APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk)试试    
+        可以[下载demo APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk)试试      
             
-        请参考博客：![文韬_武略](http://blog.csdn.net/fwt336/article/details/76086360)    
+        请参考博客：[文韬_武略](http://blog.csdn.net/fwt336/article/details/76086360)    
           
 
     欢迎star或fork
