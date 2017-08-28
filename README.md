@@ -21,13 +21,15 @@
 ![github](https://github.com/victorfan336/WheelView/blob/master/wheelview.gif)  
 
 
-----------------由于kotlin语言写的库上传不方便，所以
+### 由于kotlin语言写的库上传不方便，所以该kotlin库只用于学习kotlin语言，和了解自定义view。
+    一下内入均是以Java版本为准的，Import的地址是java版本的,不影响使用。
 
 ## 使用
 
 * Import(java版本的)   
     compile 'com.victor.library:wheelview:1.0.8@aar'  
-    version1.0.8:    
+    version1.0.8:      
+
         1.新增itemHeight属性配置；      
     	   
     	2.解决UI拖出可见范围后，有时回弹不准的问题，是由于没有做四舍五入的问题导致的；    
@@ -66,26 +68,95 @@
 ```   
 * 自定义Adapter
 	只需要实现IWheelviewAdapter即可     
-	``` java   
-	interface IWheelviewAdapter {
-	    fun getItemTitle(i: Int): kotlin.String
-	    val count: Int
-	    operator fun get(index: Int): Any
+	``` java    
+	public interface IWheelviewAdapter<T> {
+    	String getItemeTitle(int i);       
+    	int getCount();              
+    	T get(int index);            
+    	void clear();             
+	}	
+	```  
+	只要实现以上接口方法即可，下面示范一个自定义的Adapter:
+	```java 
+
+	public class WheelviewAdapter implements IWheelviewAdapter {
+
+	    private List<String> mList;
+
+	    public WheelviewAdapter(List<String> list) {
+	        mList = list;
+	    }
+
+	    @Override
+	    public String getItemeTitle(int i) {
+	        if (mList != null) {
+	            return mList.get(i);
+	        } else {
+	            return "";
+	        }
+	    }
+
+	    @Override
+	    public int getCount() {
+	        if (mList != null) {
+	            return mList.size();
+	        } else {
+	            return 0;
+	        }
+
+	    }
+
+	    @Override
+	    public String get(int index) {
+	        if (mList != null && index >= 0 && index < mList.size()) {
+	            return mList.get(index);
+	        } else {
+	            return null;
+	        }
+	    }
+
+	    @Override
+	    public void clear() {
+	        if (mList != null) {
+	            mList.clear();
+	        }
+	    }
 	}
-	```     
+
+	```  
 * 在代码中配置：
 	``` java
-	var provider: ArrayList<String> = ArrayList()
-        provider.addAll(listOf("天津市", "北京市", "黑龙江省", "江苏省", "浙江省", "安徽省",
-                "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省"))
-        val providerAdapter = WheelviewAdapter(provider)
-        wheelView1?.setAdapter(providerAdapter)
-    // 设置滚动监听
-	    wheelView?.setWheelScrollListener(object : WheelView.WheelScrollListener {
-	        override fun changed(selected: Int, name: Any) {
-	            toast("$name:被选中了第" + selected)
-	        }
-	    })
+	private String[] provides = {"天津市", "北京市", "黑龙江省", "江苏省", "浙江省", "安徽省",
+            "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省"};     
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ArrayList<String> provider = new ArrayList<>();
+        for (String name : provides) {
+            provider.add(name);
+        }
+        wheelView1 = (WheelView) findViewById(R.id.wheelview1);
+        IWheelviewAdapter providerAdapter = new WheelviewAdapter(provider);
+        wheelView1.setAdapter(providerAdapter);    
+        // 设置滚动选择监听
+        wheelView1.setWheelScrollListener(new WheelView.WheelScrollListener() {
+
+            @Override
+            public void onChanged(WheelView wheelView, int selected, Object bean) {
+                Toast.makeText(DemoActivity.this, bean + "被选中了第" + selected, Toast.LENGTH_SHORT).show();
+            }
+
+        });      
+
+	}       
+	```   
+	设置对齐模式：默认是WheelViewCenterMode居中显示     
+	```java   
+		wheelView1.setMode(WheelView.getStartModeInstance(wheelView1));           
+		wheelView1.setMode(WheelView.getCenterModeInstance(wheelView1));     
+		wheelView1.setMode(WheelView.getRecycleModeInstance(wheelView1));       
 	```
 
     ## 详细说明     
