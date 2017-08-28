@@ -159,9 +159,9 @@
 	wheelView1.setMode(WheelView.getRecycleModeInstance(wheelView1));       
 	```      
 
-    ## 详细说明                  
-        [可以下载demo APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk) 试试<br />
-        请参考博客: [文韬_武略](http://blog.csdn.net/fwt336/article/details/76086360)<br />                            
-          
+## 详细说明    
+1.[下载APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk)<br />
+2.[我的博客](http://blog.csdn.net/fwt336/article/details/76086360)<br />              
+  
 
-    欢迎star或fork
+欢迎star或fork
