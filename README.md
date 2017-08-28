@@ -29,12 +29,18 @@
     compile 'com.victor.library:wheelview:1.0.8@aar'  
     version1.0.8:   
     	1.新增itemHeight属性配置；   
-    	2.解决UI拖出可见范围后，有时回弹不准的问题，是由于没有做四舍五入的问题导致的；   
-    	3.拓展滚动监听方法，回传wheelview；   
-    	4.新增设置当前选择位置和获取当前选择位置方法：   
-    		public void setCurrItem(int index)；   
+    	   
+    	2.解决UI拖出可见范围后，有时回弹不准的问题，是由于没有做四舍五入的问题导致的；    
+    	   
+    	3.拓展滚动监听方法，回传wheelview；     
+    	
+    	4.新增设置当前选择位置和获取当前选择位置方法：     
+    	
+    		public void setCurrItem(int index)；    
+    		  
     		public int getSelectedItem()；   
-    以在公司产品中使用 
+    		
+    java版本已在公司APP中使用！ 
 
 
 * 定义了三个可配置属性：
@@ -83,7 +89,9 @@
 	```
 
     ## 详细说明     
-        可以下载demo APK试试
-        请参考博客：http://blog.csdn.net/fwt336/article/details/76086360  
+        可以![下载demo APK](https://github.com/victorfan336/WheelView/blob/master/app-demo.apk)试试    
+            
+        请参考博客：![文韬_武略](http://blog.csdn.net/fwt336/article/details/76086360)    
+          
 
     欢迎star或fork
